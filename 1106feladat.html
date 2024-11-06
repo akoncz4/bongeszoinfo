@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Böngésző azonosítása</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #232323;  /* Elegáns sötétszürke */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.5s;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info {
+            font-size: 1.1em;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .info:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .info {
+                font-size: 1em;
+            }
+        }
+    </style>
+    <script>
+        function getBrowserName() {
+            var userAgent = navigator.userAgent;
+            var browserName = "Ismeretlen böngésző";
+
+            if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1) {
+                browserName = "Google Chrome";
+            } else if (userAgent.indexOf("Firefox") > -1) {
+                browserName = "Mozilla Firefox";
+            } else if (userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1) {
+                browserName = "Apple Safari";
+            } else if (userAgent.indexOf("Edg") > -1) {
+                browserName = "Microsoft Edge";
+            } else if (userAgent.indexOf("MSIE") > -1 || userAgent.indexOf("Trident") > -1) {
+                browserName = "Internet Explorer";
+            }
+
+            return browserName;
+        }
+
+        function showBrowserInfo() {
+            var browserName = getBrowserName();
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
+
+            document.getElementById("browser-name").innerText = "A használt böngésző: " + browserName;
+            document.getElementById("window-width").innerText = "A böngésző ablak szélessége: " + windowWidth + " pixel";
+            document.getElementById("window-height").innerText = "A böngésző ablak magassága: " + windowHeight + " pixel";
+        }
+
+        window.onload = showBrowserInfo;
+        window.onresize = showBrowserInfo;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Böngésző Információ</h1>
+        <div class="info" id="browser-name"></div>
+        <div class="info" id="window-width"></div>
+        <div class="info" id="window-height"></div>
+    </div>
+</body>
+</html>
